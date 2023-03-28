@@ -5,6 +5,7 @@ body {
     margin:0 auto;
     background:white;
     color:rgb(68, 68, 68);
+    overflow-x:hidden;
 }
 .inner_layout1 {
     max-width:1400px;
