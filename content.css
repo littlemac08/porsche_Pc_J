@@ -75,18 +75,19 @@
     position:relative;
     left:0;
     width:1360px;
-    transition:.4s;
+    overflow:hidden;
 }
 .banner_wrap .slider {
+    position:relative;
     display:flex;
     width:5440px;
+    transition:.4s;
 }
 .banner_wrap .slider .slider_content {
     position:relative;
     display:block;
     width:100%;
     height:100%;
-    float:left;
 }
 .banner_wrap .slider .slider_content:nth-child(2) img {
     position:absolute;
@@ -213,6 +214,28 @@
             height:50px;
             background:url('source/img/main_banner_slide6.png') no-repeat center center / 100%;
         }
+
+        .dots {
+            position:absolute;
+            left:50%;
+            bottom:17%;
+            transform:translate(-50%);
+            z-index:1;
+        }
+        .dots button {
+            width:15px;
+            height:15px;
+            text-indent:-9999px;
+            margin:0 10px;
+            border-radius:10px;
+            border:0;
+            background:midnightblue;
+            color:#FFF;
+        }
+        .dots button:hover {
+            cursor:pointer;
+        }
+
 /* Main Content */
 .content_wrap {
     max-width:1920px;
