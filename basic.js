@@ -1,3 +1,54 @@
+/* Gnb Deps1 */
+
+const elheader = document.querySelector('.header')
+const elGnbUl = document.querySelector('.nav .gnb')
+const elGnbLi = document.querySelectorAll('.nav .gnb > .gnb_main')
+const elGnbDeps = document.querySelectorAll('.dep1_wrap')
+const elCloseBtn = document.querySelector('.close_btn')
+/* Gnb Deps2 */
+const elGnbSubArticle1 = document.querySelectorAll('.dep1_wrap .wrap_1 .article1 > li')
+const elGnbSubArticle2 = document.querySelectorAll('.dep1_wrap .wrap_1 .article2 ul')
+const elGnbSubArticle2Content = document.querySelectorAll('.dep1_wrap .wrap_1 .article2 ul > li')
+
+let ArticleIdx = 0; //rest index number
+
+/* Gnb Deps1 */
+elGnbLi.forEach(function(el, index){
+    el.addEventListener('mouseover',function(e){
+        if(elGnbDeps[index]){
+            elheader.classList.add('active')
+            elGnbSubArticle2[ArticleIdx].classList.add('active')
+            elGnbDeps[index].classList.add('active')
+        }
+    })
+    elCloseBtn.addEventListener('click', function(e){
+        elGnbDeps.forEach(function(el, index){
+            el.classList.remove('active')
+            elheader.classList.remove('active')
+        })
+    })
+})
+
+/* Gnb Deps2 */
+elGnbSubArticle1.forEach(function(el, index){
+    el.addEventListener('mouseover',function(e){
+        console.log(ArticleIdx)
+        if(elGnbSubArticle2[ArticleIdx]){
+            elGnbSubArticle2[ArticleIdx].classList.remove('active') //before mouseover index del
+            elGnbSubArticle2[index].classList.add('active')
+            ArticleIdx = index; //index number save
+            console.log(ArticleIdx)
+        }
+    })
+    el.addEventListener('mouseout', function(e){
+        elGnbSubArticle2.forEach(function(el, index){
+            el.classList.remove('active')
+        })
+    })
+})
+
+/* main slider */
+
 const slides = document.querySelector('.banner_wrap .slider') //슬라이더 선택
 const slideContent = document.querySelectorAll('.banner_wrap .slider .slider_content') //슬라이더 컨텐츠 선택
 const ContentWidth = slideContent[0].offsetWidth; //컨텐츠 width 불러오기
@@ -17,19 +68,27 @@ prevBtn.addEventListener('click', prev) //prev click 버튼
 function next(){ //next 버튼 함수
     if(currentIdx < ContentCount-1){
         slides.style.left = `-${(currentIdx+1)* ContentWidth}px`
+        dotBtn[currentIdx].style.background = 'lightgray'
         currentIdx += 1;
+        dotBtn[currentIdx].style.background = 'midnightblue'
     } else if(currentIdx === ContentCount-1){
         slides.style.left = `0px`
+        dotBtn[currentIdx].style.background = 'lightgray'
         currentIdx = 0;
+        dotBtn[currentIdx].style.background = 'midnightblue'
     }
 }
 function prev(){ //prev 버튼 함수
     if(currentIdx === 0){
         slides.style.left = `-${(ContentCount-1)* ContentWidth}px`;
+        dotBtn[currentIdx].style.background = 'lightgray'
         currentIdx = ContentCount-1;
+        dotBtn[currentIdx].style.background = 'midnightblue'
     } else if(currentIdx > 0){
         slides.style.left = `-${(currentIdx-1)* ContentWidth}px`;
+        dotBtn[currentIdx].style.background = 'lightgray'
         currentIdx = currentIdx-1;
+        dotBtn[currentIdx].style.background = 'midnightblue'
     }
 }
 let newBtn
@@ -43,10 +102,34 @@ const dotBtn = document.querySelectorAll('.dots button') //dots 버튼들
 
 dotBtn.forEach(function(dot,dotNumber){
     dot.addEventListener('click',function(){
-        slides.style.left = `-${(dotNumber) * ContentWidth}px`
+        slides.style.left = `-${dotNumber * ContentWidth}px`
+        dotBtn[currentIdx].style.background = 'lightgray'
         currentIdx = dotNumber;
+        dotBtn[currentIdx].style.background = 'midnightblue'
     })
 })
 
+/* sub slider */
 
+const elSubNextBtn = document.querySelector('.nav_side .next_btn')
+const elSubPrevBtn = document.querySelector('.nav_side .prev_btn')
+const elSubSlider = document.querySelector('.nav_btn > ul')
+console.log(elSubSlider)
+
+elSubNextBtn.addEventListener('click', function(){
+    if(elSubSlider.style.left === '-720px'){
+        elSubSlider.style.left = '0px'
+
+    } else {
+        elSubSlider.style.left = '-720px'
+    }
+})
+
+elSubPrevBtn.addEventListener('click', function(){
+    if(elSubSlider.style.left === '0px'){
+        elSubSlider.style.left = '-720px'
+    } else {
+        elSubSlider.style.left = '0px'
+    }
+})
 
