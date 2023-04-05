@@ -1,9 +1,12 @@
 /* Gnb Deps1 */
-
 const elheader = document.querySelector('.header')
 const elGnbUl = document.querySelector('.nav .gnb')
 const elGnbLi = document.querySelectorAll('.nav .gnb > .gnb_main')
-const elGnbDeps = document.querySelectorAll('.dep1_wrap')
+const elGnbDeps = [
+    document.querySelector('.dep1_wrap'),
+    null, null, null, null, null, null,
+    document.querySelector('.dep8_wrap')
+    ];
 const elCloseBtn = document.querySelector('.close_btn')
 /* Gnb Deps2 */
 const elGnbSubArticle1 = document.querySelectorAll('.dep1_wrap .wrap_1 .article1 > li')
@@ -13,31 +16,66 @@ const elGnbSubArticle2Content = document.querySelectorAll('.dep1_wrap .wrap_1 .a
 let ArticleIdx = 0; //rest index number
 
 /* Gnb Deps1 */
+// elGnbLi.forEach(function(el, index){
+//     el.addEventListener('mouseover',function(e){
+//         if(elGnbDeps[index]){
+//             elheader.classList.add('active')
+//             elGnbSubArticle2[ArticleIdx].classList.add('active')
+//             elGnbDeps[index].classList.add('active')
+//         }
+//     })
+//     elCloseBtn.addEventListener('click', function(e){
+//         elGnbDeps.forEach(function(el, index){
+//             el.classList.remove('active')
+//             elheader.classList.remove('active')
+//         })
+//     })
+// })
+/* Gnb Deps1 */
 elGnbLi.forEach(function(el, index){
-    el.addEventListener('mouseover',function(e){
-        if(elGnbDeps[index]){
-            elheader.classList.add('active')
-            elGnbSubArticle2[ArticleIdx].classList.add('active')
-            elGnbDeps[index].classList.add('active')
-        }
-    })
-    elCloseBtn.addEventListener('click', function(e){
-        elGnbDeps.forEach(function(el, index){
-            el.classList.remove('active')
-            elheader.classList.remove('active')
+    if(index < 5){
+        el.addEventListener('mouseover',function(e){
+            if(elGnbDeps[index]){
+                elheader.classList.add('active')
+                elGnbSubArticle2[ArticleIdx].classList.add('active')
+                elGnbDeps[index].classList.add('active')
+            } 
         })
-    })
+        elCloseBtn.addEventListener('click', function(e){
+            elGnbDeps.forEach(function(el, index){
+                if(elGnbDeps[index]){
+                el.classList.remove('active')
+                elheader.classList.remove('active')
+                }
+            })
+        })
+    } else {
+        el.addEventListener('mouseover',function(e){
+            if(elGnbDeps[index]){
+                elheader.classList.add('active')
+                elGnbSubArticle2[ArticleIdx].classList.add('active')
+                elGnbDeps[index].classList.add('active')
+            } 
+        })
+        el.addEventListener('mouseout',function(e){
+            if(elGnbDeps[index]){
+                elheader.classList.remove('active')
+                elGnbSubArticle2[ArticleIdx].classList.remove('active')
+                elGnbDeps[index].classList.remove('active')
+            }
+        })
+    }
 })
+
+
 
 /* Gnb Deps2 */
 elGnbSubArticle1.forEach(function(el, index){
     el.addEventListener('mouseover',function(e){
-        console.log(ArticleIdx)
         if(elGnbSubArticle2[ArticleIdx]){
             elGnbSubArticle2[ArticleIdx].classList.remove('active') //before mouseover index del
             elGnbSubArticle2[index].classList.add('active')
             ArticleIdx = index; //index number save
-            console.log(ArticleIdx)
         }
     })
     el.addEventListener('mouseout', function(e){
@@ -47,8 +85,8 @@ elGnbSubArticle1.forEach(function(el, index){
     })
 })
 
-/* main slider */
 
+/* main slider */
 const slides = document.querySelector('.banner_wrap .slider') //슬라이더 선택
 const slideContent = document.querySelectorAll('.banner_wrap .slider .slider_content') //슬라이더 컨텐츠 선택
 const ContentWidth = slideContent[0].offsetWidth; //컨텐츠 width 불러오기
@@ -110,11 +148,9 @@ dotBtn.forEach(function(dot,dotNumber){
 })
 
 /* sub slider */
-
 const elSubNextBtn = document.querySelector('.nav_side .next_btn')
 const elSubPrevBtn = document.querySelector('.nav_side .prev_btn')
 const elSubSlider = document.querySelector('.nav_btn > ul')
-console.log(elSubSlider)
 
 elSubNextBtn.addEventListener('click', function(){
     if(elSubSlider.style.left === '-720px'){
@@ -133,3 +169,27 @@ elSubPrevBtn.addEventListener('click', function(){
     }
 })
 
+/* content1 */
+const elGender = document.querySelectorAll('.content_wrap .content1 .content_inside .content_right > ul > li')
+const elContentLeft_img = document.querySelectorAll('.content_wrap .content1 .content_inside .content_left > a')
+const elContentleft_text = document.querySelectorAll('.content_wrap .content1 .content_inside .content_right > h2')
+const elContentRight1 = document.querySelectorAll('.content_wrap .content1 .content_inside .content_right .right_imgs > ul:nth-child(1) > li')
+const elContentRight2 = document.querySelectorAll('.content_wrap .content1 .content_inside .content_right .right_imgs > ul:nth-child(2) > li')
+
+let genderIdx = 0;
+
+elGender.forEach(function(gender, index){
+    gender.addEventListener('click',function(e){
+        e.preventDefault();
+        // console.log(`이전 인덱스: ${genderIdx}, 클릭한 인덱스: ${index}`);
+        elContentLeft_img[genderIdx].classList.remove('active');
+        elContentleft_text[genderIdx].classList.remove('active');
+        elContentRight1[genderIdx].classList.remove('active');
+        elContentRight2[genderIdx].classList.remove('active');
+        elContentLeft_img[index].classList.add('active');
+        elContentleft_text[index].classList.add('active');
+        elContentRight1[index].classList.add('active');
+        elContentRight2[index].classList.add('active');
+        genderIdx = index;
+    })
+})
