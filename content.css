@@ -68,6 +68,7 @@
 .banner_width {
     position:relative;
     max-width:1920px;
+    margin:auto;
     background-image:url('source/img/main_banner_bg.jpg');
     background-color:rgb(247, 243, 242);
 }
@@ -329,6 +330,7 @@
 /* Main Content */
 .content_wrap {
     max-width:1920px;
+    margin:auto;
 }
     /* content1 */
     .content_wrap .content1 {
